@@ -18,7 +18,7 @@ rownames(metadata) <- metadata$`SUBJECT ID TIME POINT`
 rownames(data) <- rownames(metadata)
 metabilotes_info <- loaded_data$feature_metadata
 stats_table <- read.delim(
-  'analysis/Tweedieverse/Infant/Metabolite/Tweedieverse_meatbolites_Gestational_age/all_results.tsv',
+  'analysis/Tweedieverse/Infant/Metabolite/Tweedieverse_metabolitesBirth_weight/all_results.tsv',
   sep = '\t',
   header = TRUE,
   fill = FALSE,

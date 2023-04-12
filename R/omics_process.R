@@ -19,7 +19,7 @@ setwd("/Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/")
 output_path <- paste('analysis/meatbolite', sep = '')
 dir.create(file.path(output_path), showWarnings = FALSE)
 
-
+do_write = F
 
 ####Read metabolites ##########################
 #AO and AV label missing as well as data
@@ -122,7 +122,7 @@ rownames(genera) <- gsub("X", "", rownames(genera))
 ##### explanatory plots ###
 
 ad <- adonis2(species ~ . , data= mom_or_infant , permutations=4999, mehod='euclidean')
-
+ad
 
 ############## Filter species for
 breastmilk_species <- species[grepl("_m", row.names(species)),]
@@ -184,6 +184,18 @@ mom_or_infant_BGC[!mom_or_infant_BGC$Sample %in% c("Infant stool", "Breast milk"
 breastmilk_BGC <- BGCs[grepl("_m", row.names(BGCs)),]
 stool_BGC <- BGCs[grepl("_f", row.names(BGCs)),]
 
+if (do_write){
 
+  write.table(mother_microbiome, 'data/breastmilk_microbiome.tsv',
+              sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
+  write.table(infant_microbiome, 'data/infant_microbiome.tsv',
+              sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
+  write.table(infant_metabolite, 'data/infant_metabolite.tsv',
+              sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
+  write.table(breastmilk_BGC, 'data/breastmilk_BGC.tsv',
+              sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
+  write.table(stool_BGC, 'data/stool_BGC.tsv',
+              sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
+}
 
 

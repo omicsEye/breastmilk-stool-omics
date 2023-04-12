@@ -11,7 +11,7 @@ library(omicsArt)
 library(stringr)
 library(readxl)
 ######## Infant information#####
-do_write = T
+do_write = F
 infant_metadata <- read.delim(
   #'~/Box/GW Genomics Core Projects/Projects Currently being Analyzed/INOVA_Stool_and_Breastmilk_0074(Ali)/data/metadata/infant_metadata.txt',
   '/Users/rah/Library/CloudStorage/Box-Box/GW Genomics Core Projects/Projects Currently being Analyzed/Projects for Pay/INOVA_Stool_and_Breastmilk_0074 (Ali)/data/metadata/infant_metadata.txt',
@@ -154,4 +154,5 @@ mother_metadata_d$`Visit time point` <- "d"
 rownames(mother_metadata_d)  <- gsub("a", "d", rownames(mother_metadata_d))
 mother_metadata <- rbind(mother_metadata_a, mother_metadata_b, mother_metadata_c, mother_metadata_d)
 row.names(mother_metadata)<- paste0(row.names(mother_metadata), "_", "m", spe="")
+
 

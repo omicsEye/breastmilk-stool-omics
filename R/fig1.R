@@ -15,6 +15,8 @@ paird_microbiome <- read.delim(
   row.names = 1
 )
 
+
+
 paird_microbiome <- subset(paird_microbiome, paird_microbiome$Feature_1==paird_microbiome$Feature_2)
 paird_microbiome$gwfill[paird_microbiome$Correlation > 0.0 & paird_microbiome$pval < 0.05 ] <- "#002654"
 paird_microbiome$gwfill[paird_microbiome$Correlation < 0.0  & paird_microbiome$pval < 0.05] <- "#E5D19D"
@@ -48,9 +50,19 @@ fig2 <- ggdraw() +
     axis.text.y = element_text(size = 5)), x = .77, y = 0, width = .23, height = .5)+
   draw_plot_label((label = c("a", "b", "c", "d")),
                   size = 9,x = c(0, 0, .53, .76), y = c(1, 0.6, 0.6, .6))
+
+# fig2 <- ggdraw() +
+#   draw_plot(speices_heat_plot$gtable,
+#             x = 0.02, y = .6, width = .99, height = .4) +
+#   draw_plot(corr_bar_plot,
+#             x = 0.02, y = 0, width = 1, height = .6) +
+#     draw_plot_label((label = c("a", "b")),
+#                   size = 9,x = c(0, 0), y = c(1, 0.6))
+
+
 fig2
 
 setwd("/Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/")
 
-ggsave(filename = 'manuscript/figures/fig1_overviwe_microbiome/fig2.pdf', plot=fig2, width = 183, height = 100, units = "mm", dpi = 350)
-ggsave(filename = 'manuscript/figures/fig1_overviwe_microbiome/fig2.png', plot=fig2, width = 183, height = 100, units = "mm", dpi = 350)
+ggsave(filename = 'manuscript/figures/fig1_overviwe_microbiome/fig2_v2.pdf', plot=fig2, width = 4.8, height = 3, units = "in", dpi = 350)
+ggsave(filename = 'manuscript/figures/fig1_overviwe_microbiome/fig2_v2.png', plot=fig2, width = 4.8, height = 3, units = "in", dpi = 350)

@@ -3,8 +3,8 @@ library(permute)
 setwd("/Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/")
 
 #infant
-infant_microbiome <- as.data.frame(t(infant_microbiome))
-infant_metadata2 = infant_metadata#[infant_metadata$Visit=="a",]
+infant_microbiome2 <- as.data.frame(t(infant_microbiome))
+infant_metadata2 = infant_metadata[, !colnames(infant_metadata) %in% c("External ID")]#[infant_metadata$Visit=="a",]
 infant_metadata2 <- infant_metadata2[, apply(infant_metadata2, 2, Tweedieverse::entropy) > 0.5]
 intersect_samples <- intersect(rownames(infant_microbiome2), rownames(infant_metadata2))
 infant_metadata2 = infant_metadata[intersect_samples,]
@@ -41,7 +41,7 @@ for (meta in colnames(infant_metadata2)){
     print(paste('error:', e))
   })
 }
-infant_metadata2 = infant_metadata#[infant_metadata$Visit=="a",]
+infant_metadata2 = infant_metadata[, !colnames(infant_metadata) %in% c("External ID")]#[infant_metadata$Visit=="a",]
 infant_metadata2 <- infant_metadata2[, apply(infant_metadata2, 2, Tweedieverse::entropy) > 0.5]
 intersect_samples <- intersect(rownames(infant_metabolite), rownames(infant_metadata2))
 infant_metadata2 = infant_metadata2[intersect_samples,]
@@ -69,7 +69,7 @@ for (meta in colnames(infant_metadata2)){
 
 #####################Mother###############################
 mother_microbiome_data <- as.data.frame(t(mother_microbiome))
-infant_metadata2 = infant_metadata#[infant_metadata$Visit=="a",]
+infant_metadata2 = infant_metadata[, !colnames(infant_metadata) %in% c("External ID")]#[infant_metadata$Visit=="a",]
 infant_metadata2 <- infant_metadata2[, apply(infant_metadata2, 2, Tweedieverse::entropy) > 0.5]
 intersect_samples <- intersect(rownames(mother_microbiome_data), rownames(infant_metadata2))
 infant_metadata2 = infant_metadata2[intersect_samples,]
@@ -111,16 +111,16 @@ write.table( R_perm,"manuscript/figures/fig3_PERMANOVA/omnibus_heatmap_Infant_R.
 
 ##########################Maternal Metadata #######################
 
+mother_metadata2 = mother_metadata[, !colnames(mother_metadata) %in% c("External ID")]#[mother_metadata$Visit=="a",]
 
-M_perm <- matrix(NA, nrow=length(mother_metadata), ncol=3)
+M_perm <- matrix(NA, nrow=length(mother_metadata2), ncol=3)
 
-rownames(M_perm) <- colnames(mother_metadata)
+rownames(M_perm) <- colnames(mother_metadata2)
 colnames(M_perm) <- c("Breast milk microbiome", "Infant stool microbiome", "Infant stool metabolite")
 R_perm = P_perm = M_perm
 
 #infant
-infant_microbiome2 <- infant_microbiome
-mother_metadata2 = mother_metadata#[mother_metadata$Visit=="a",]
+infant_microbiome2 <- as.data.frame(t(infant_microbiome))
 
 intersect_samples <- intersect(rownames(infant_microbiome2), rownames(mother_metadata2))
 mother_metadata2 = mother_metadata2[intersect_samples,]
@@ -178,7 +178,7 @@ for (meta in colnames(mother_metadata2)){
 mother_microbiome_data <- as.data.frame(t(mother_microbiome))
 #mother_metadata2 = mother_metadata[mother_metadata$Visit=="a",]
 intersect_samples <- intersect(rownames(mother_microbiome_data), rownames(mother_metadata2))
-mother_metadata2 = mother_metadata[intersect_samples,]
+mother_metadata2 = mother_metadata2[intersect_samples,]
 mother_microbiome_data = mother_microbiome_data[intersect_samples,]
 omic <- "Breast milk microbiome"
 data <- mother_microbiome_data

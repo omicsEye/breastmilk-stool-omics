@@ -21,6 +21,44 @@ fakepcl <- list(meta=mom_or_infant, x=as.matrix(species),
 heat_plot <- omicsArt:::pcl.heatmap(fakepcl, sqrtspace = T, gamma = 2, meta= T, show_colnames = F, show_rownames = T,treeheight_row = 0, treeheight_col= 5)
 ggsave(filename='analysis/species_heatmap.png', plot=heat_plot, width = 11, height = 18, units = "in", dpi = 300)
 ggsave(filename='analysis/species_heatmap.png', plot=heat_plot, width = 11, height = 18, units = "in", dpi = 300)
+
+
+##### coorelation plot
+merged_microbiome <- merge(as.data.frame(t(mother_microbiome)),as.data.frame(t(infant_microbiome)),by='row.names',all=TRUE)
+
+
+scatter_plot_1 <- ggplot(data=merged_microbiome,aes(`Streptococcus mitis.y`, `Streptococcus mitis.x`)) +
+  #stat_density2d( aes(fill = 'grey', alpha = .5), geom='polygon')+#,colour=uniref_color, fill = result$annot_cat) +
+  geom_point( aes(), fill = 'red', color = 'black', alpha = .5, shape = 21, size = 1.5, stroke = 0.1) +
+  #scale_y_continuous(limits=c(min(combinde_data$A2M), max(combine_data$A2M)))+
+  #scale_x_continuous(limits=c(min(combine_data$`ERV316A3_12q24.13`), max(combine_data$`ERV316A3_12q24.13`)))+
+  stat_smooth(method = "glm", color ='red')+
+  guides(alpha='none')+labs("")+#labs(title = bodysites[[k]])+
+  #nature_theme + #xlab("HILIC-pos-C18:1-OH carnitine") +  ylab("Roseburia hominis")
+  #annotate(geom="text", x=(max(combined_data$`ERV316A3_12q24.13`,na.rm = T) - .45*(max(combine_data$`ERV316A3_12q24.13`, na.rm = T) -
+  #                                                                                  min(combine_data$`ERV316A3_12q24.13`, na.rm = T))),
+  #         y=max(combine_data$A2M, na.rm = T) -15000,
+  #         label=paste("Spearman correlation: 0.94\nq-value = 1.19E-17"), color="black", size=rel(2),
+  #         fontface="italic")+
+  guides(legend.position=NULL)+
+  ggplot2::annotate(
+    geom = "text",
+    x = Inf,
+    y = 100,
+    hjust = 1,
+    vjust = 1,
+    label = sprintf(
+      "p-value: %.4f",
+      0.00395044897254265
+    ) ,
+    color = "black",
+    size = 3,
+    fontface = "italic"
+  )+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+
+
 ord <- omicsArt:::pcl.pcoa(fakepcl)
 ord_plot <- omicsArt:::pcl.ordplot(fakepcl, ord, colour="Sample")
 ggsave(filename='analysis/species_pcoa.png', plot=ord_plot, width = 4, height = 3, units = "in", dpi = 300)
