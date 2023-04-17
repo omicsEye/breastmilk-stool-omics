@@ -73,28 +73,37 @@ mom_or_infant[mom_or_infant=="m"] <- "Breast milk"
 mom_or_infant <- as.data.frame(t(mom_or_infant))
 ###visualization
 mom_or_infant <- mom_or_infant[mom_or_infant$Sample %in% c("Stool", "Breast milk"),, drop=F]
-# Antibiotic resistant genes
+# antibiotic resistance  genes
 AR_genes <- genes[AR_genes_study,]
 AR_genes <- as.data.frame(t(AR_genes))
 AR_genes <- AR_genes[rownames(mom_or_infant),]
 fakepcl <- list(meta=mom_or_infant, x=as.matrix(AR_genes),
                 ns=dim(AR_genes)[2], nf=dim(AR_genes)[1])
-heat_plot <- omicsArt:::pcl.heatmap(fakepcl, sqrtspace = T, gamma = 2, meta= c("Sample"), show_colnames = T, show_rownames = T,treeheight_row = 5, treeheight_col= 5 )
+AR_genes_heat_plot <- omicsArt:::pcl.heatmap(fakepcl, sqrtspace = T, gamma = 2, meta= c("Sample"), show_colnames = F, show_rownames = T,treeheight_row = 5, treeheight_col= 5 )
 ggsave(filename='analysis/AR_genes.png', plot=heat_plot, width = 18, height = 3.1, units = "in", dpi = 300)
 ggsave(filename='analysis/AR_genes.pdf', plot=heat_plot, width = 18, height = 3.1, units = "in", dpi = 300)
 
-# Antibiotic resistant genes
+# multi-drug resistance  genes
 
 R_genes <- genes[resistant_genes_study,]
 R_genes <- as.data.frame(t(R_genes))
 R_genes <- R_genes[rownames(mom_or_infant),]
 fakepcl <- list(meta=mom_or_infant, x=as.matrix(R_genes),
                 ns=dim(AR_genes)[2], nf=dim(AR_genes)[1])
-heat_plot <- omicsArt:::pcl.heatmap(fakepcl, sqrtspace = T, gamma = 2, meta= c("Sample"), show_colnames = F, show_rownames = T,treeheight_row = 5, treeheight_col= 5 )
+R_genes_heat_plot <- omicsArt:::pcl.heatmap(fakepcl, sqrtspace = T, gamma = 2, meta= c("Sample"), show_colnames = F, show_rownames = T,treeheight_row = 5, treeheight_col= 5 )
 ggsave(filename='analysis/R_genes.png', plot=heat_plot, width = 18, height = 9, units = "in", dpi = 300)
 ggsave(filename='analysis/R_genes.pdf', plot=heat_plot, width = 18, height = 9, units = "in", dpi = 300)
 
 
+fig_resistance <-   plot_grid(R_genes_heat_plot$gtable,
+                             AR_genes_heat_plot$gtable,
+                             rel_heights = c(6,2),
+                             labels = c('a, Multidrug resistance genes', 'b, Antibiotic resistance genes'),
+                             label_size = 7, ncol = 1, nrow = 2)
+ggsave(filename='manuscript/figures/fig_AR_genes/fig_AR_genes.pdf', plot=fig_resistance, width = 7.2, height = 5, units = "in", dpi = 300)
+ggsave(filename='manuscript/figures/fig_AR_genes/fig_AR_genes.png', plot=fig_resistance, width = 7.2, height = 5, units = "in", dpi = 300)
+
+fig_resistance
 ###### data pairing #########
 # infant microbial species and samples information
 infant_genes_samples <- intersect(colnames(genes[,colnames(mom_or_infant[,mom_or_infant[1,]=="Infant",drop=F])]), rownames(infant_metadata))

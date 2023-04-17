@@ -1,14 +1,14 @@
 cd /Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/
 
 
-### 1 microbiome-microbiome
+### 1:  Infant stool microbiome- breastmilk microbiome
 btest -X data/infant_microbiome_mother_microbiome.txt -Y data/mother_microbiome_infant_microbiome.txt -o analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair -m spearman --fdr 1.0 
 
 
 blockplot analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/simtable.tsv analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/btest_20.png --axlabels "Infant stool microbiome" "Breast milk microbiome"  --similarity Spearman --strongest 20
 
 
-### 2 infant metabolite - mother microbiome 
+### 2: infant stool metabolite - breast milk microbiome 
 btest -X data/infant_metabolite_mother_microbiome.txt -Y data/mother_microbiome_infant_metabolite.txt -o analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair -m spearman --fdr 1.0 
 
 
@@ -16,7 +16,7 @@ btest -X data/infant_metabolite_mother_microbiome.txt -Y data/mother_microbiome_
 blockplot analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/simtable.tsv analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/btest_20.png --axlabels "Infant stool metabolites" "Breast milk microbiome"  --similarity Spearman --strongest 20
 
 
-### 3 infant microbiome-metabolite
+### 3 infant stool microbiome- infant stool metabolite
 btest -X data/infant_microbiome_metabolite.txt -Y data/infant_metabolite_microbiome.txt -o analysis/btest_results/infant_microbiome_metabolite_btest_pair -m spearman --fdr 1.0 
 
 blockplot analysis/btest_results/infant_microbiome_metabolite_btest_pair/simtable.tsv analysis/btest_results/infant_microbiome_metabolite_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_microbiome_metabolite_btest_pair/btest_20_strongest.pdf --strongest 20 --axlabels "Infant stool microbiome" "Infant stool metabolites"  --similarity Spearman
