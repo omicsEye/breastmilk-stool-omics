@@ -23,7 +23,7 @@ dir.create(file.path(output_path), showWarnings = FALSE)
 ####Read metabolites ##########################
 #AO and AV label missing as well as data
 path_to_file <- "data/INOV-0102-19VW+ CDT_21AUG2020_Cleanded_10_15_2020.xlsx"
-loaded_data <- load_data(input=path_to_file, type = 'all', sheet = 2, ID = 'Metabolite')
+loaded_data <- load_data(input=path_to_file, type = 'all', sheet = 2, id = 'Metabolite')
 metabolites <- loaded_data$data
 metabolites <- numeric_dataframe(metabolites)
 metadata <- loaded_data$sample_metadata

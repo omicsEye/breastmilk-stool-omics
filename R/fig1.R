@@ -64,5 +64,5 @@ fig2
 
 setwd("/Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/")
 
-ggsave(filename = 'manuscript/figures/fig1_overviwe_microbiome/fig2_v2.pdf', plot=fig2, width = 4.8, height = 3, units = "in", dpi = 350)
-ggsave(filename = 'manuscript/figures/fig1_overviwe_microbiome/fig2_v2.png', plot=fig2, width = 4.8, height = 3, units = "in", dpi = 350)
+ggsave(filename = 'manuscript/figures/fig_overviwe_microbiome/fig2_v3.pdf', plot=fig2, width = 4.8, height = 3, units = "in", dpi = 350)
+ggsave(filename = 'manuscript/figures/fig_overviwe_microbiome/fig2_v3.png', plot=fig2, width = 4.8, height = 3, units = "in", dpi = 350)
