@@ -80,8 +80,8 @@ AR_genes <- AR_genes[rownames(mom_or_infant),]
 fakepcl <- list(meta=mom_or_infant, x=as.matrix(AR_genes),
                 ns=dim(AR_genes)[2], nf=dim(AR_genes)[1])
 AR_genes_heat_plot <- omicsArt:::pcl.heatmap(fakepcl, sqrtspace = T, gamma = 2, meta= c("Sample"), show_colnames = F, show_rownames = T,treeheight_row = 5, treeheight_col= 5 )
-ggsave(filename='analysis/AR_genes.png', plot=heat_plot, width = 18, height = 3.1, units = "in", dpi = 300)
-ggsave(filename='analysis/AR_genes.pdf', plot=heat_plot, width = 18, height = 3.1, units = "in", dpi = 300)
+ggsave(filename='analysis/AR_genes.png', plot=AR_genes_heat_plot, width = 18, height = 3.1, units = "in", dpi = 300)
+ggsave(filename='analysis/AR_genes.pdf', plot=AR_genes_heat_plot, width = 18, height = 3.1, units = "in", dpi = 300)
 
 # multi-drug resistance  genes
 
@@ -91,8 +91,8 @@ R_genes <- R_genes[rownames(mom_or_infant),]
 fakepcl <- list(meta=mom_or_infant, x=as.matrix(R_genes),
                 ns=dim(AR_genes)[2], nf=dim(AR_genes)[1])
 R_genes_heat_plot <- omicsArt:::pcl.heatmap(fakepcl, sqrtspace = T, gamma = 2, meta= c("Sample"), show_colnames = F, show_rownames = T,treeheight_row = 5, treeheight_col= 5 )
-ggsave(filename='analysis/R_genes.png', plot=heat_plot, width = 18, height = 9, units = "in", dpi = 300)
-ggsave(filename='analysis/R_genes.pdf', plot=heat_plot, width = 18, height = 9, units = "in", dpi = 300)
+ggsave(filename='analysis/R_genes.png', plot=R_genes_heat_plot, width = 18, height = 9, units = "in", dpi = 300)
+ggsave(filename='analysis/R_genes.pdf', plot=R_genes_heat_plot, width = 18, height = 9, units = "in", dpi = 300)
 
 
 fig_resistance <-   plot_grid(R_genes_heat_plot$gtable,
@@ -109,8 +109,8 @@ fig_resistance
 infant_genes_samples <- intersect(colnames(genes[,colnames(mom_or_infant[,mom_or_infant[1,]=="Infant",drop=F])]), rownames(infant_metadata))
 infant_metadata_genes <- infant_metadata[infant_genes_samples,]
 infant_genes <- genes[,infant_genes_samples]
-rownames(infant_metadata) <- gsub("_f","", rownames(infant_metadata))
-rownames(infant_metadata) <- paste0(infant_metadata$External_ID, infant_metadata$Visit, spe="")
+#rownames(infant_metadata) <- gsub("_f","", rownames(infant_metadata))
+#rownames(infant_metadata) <- paste0(infant_metadata$External_ID, infant_metadata$Visit, spe="")
 mother_genes_samples <- intersect(colnames(genes[,colnames(mom_or_infant[,mom_or_infant[1,]=="Mother",drop=F])]), rownames(mother_metadata))
 mother_metadata_genes <- mother_metadata[mother_genes_samples,]
 mother_genes <- genes[,mother_genes_samples]
@@ -139,11 +139,11 @@ write.table(infant_genes_mother_genes, 'data/infant_genes_mother_genes.txt',
             sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
 write.table(mother_genes_infant_genes, 'data/mother_genes_infant_genes.txt',
             sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
-mother_metadata$Breast_milk_collected <- infant_metadata[rownames(mother_metadata), "Breast_milk_collected"]
+mother_metadata$Maternal_vs_donor <- infant_metadata[rownames(mother_metadata), "Maternal vs. donor"]
 
 Maaslin2(mother_genes,
-         mother_metadata[, "Breast_milk_collected", drop=F],
-         paste('analysis/Maaslin2/Breastmilk/Maaslin2_mother_genes_',"Breast_milk_collected", sep =""),
+         mother_metadata[, "Maternal_vs_donor", drop=F],
+         paste('analysis/Maaslin2/Breastmilk/Maaslin2_mother_genes_',"Maternal_vs_donor", sep =""),
          min_abundance = 0.0,
          min_prevalence = 0.1,
          max_significance = .1,

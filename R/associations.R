@@ -8,7 +8,7 @@ colnames(infant_metadata) <- gsub(" ", "_", colnames(infant_metadata))
 infant_metabolite [is.na(infant_metabolite)] <- 0
 # for (meta in colnames(infant_metadata)){
 #   tryCatch({
-#     
+#
 #     Tweedieverse::Tweedieverse(infant_metabolite,
 #                                infant_metadata[infant_metadata$Visit=='a', meta , drop=F],
 #                                paste('analysis/Tweedieverse/Infant/Metabolite/Tweedieverse_meatbolites_visit_a_', meta, sep = ""),
@@ -18,7 +18,7 @@ infant_metabolite [is.na(infant_metabolite)] <- 0
 #                                standardize = F,
 #                                fixed_effects = meta
 #     )
-#     
+#
 #   },
 #   error = function(e) {
 #     print(meta)
@@ -195,7 +195,7 @@ for (meta in colnames(mother_metadata)){
 }
 
 # Visit a
-# 
+#
 # for (meta in colnames(mother_metadata)){
 #   if (meta=="Race")
 #     Tweedieverse::Tweedieverse(mother_microbiome,
@@ -252,7 +252,7 @@ meta <- "Country_of_living_from_birth"
 #              #fixed_effects = c("Visit", "Race"),
 #              heatmap_first_n = 50,  #"Has_subj_ever_had_a_yeast_infection"),
 #     )
-#     
+#
 #   },
 #   error = function(e) {
 #     print(meta)
@@ -278,7 +278,7 @@ for (meta in colnames(infant_metadata)){
              #fixed_effects = c("Visit", "Race"),
              heatmap_first_n = 50,  #"Has_subj_ever_had_a_yeast_infection"),
     )
-    
+
   },
   error = function(e) {
     print(meta)
@@ -302,6 +302,8 @@ for (meta in colnames(infant_metadata)){
     print(paste('error:', e))
   })
 }
+meta <- "Maternal_vs._donor"
+
 for (meta in colnames(infant_metadata)){
   tryCatch({
     Tweedieverse::Tweedieverse(mother_microbiome,
@@ -352,7 +354,7 @@ for (meta in colnames(mother_metadata)){
                                plot_heatmap = T,
                                plot_scatter = T,
                                standardize = F)
-    
+
   },
   error = function(e) {
     print(meta)
@@ -377,7 +379,7 @@ for (meta in colnames(mother_metadata)){
 #              #fixed_effects = c("Visit", "Race"),
 #              heatmap_first_n = 50,  #"Has_subj_ever_had_a_yeast_infection"),
 #     )
-#     
+#
 #   },
 #   error = function(e) {
 #     print(meta)
@@ -394,7 +396,7 @@ for (meta in colnames(mother_metadata)){
                                plot_heatmap = T,
                                plot_scatter = T,
                                standardize = F)
-    
+
   },
   error = function(e) {
     print(meta)

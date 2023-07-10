@@ -2,7 +2,7 @@ library(ggplot2)
 library(ggridges)
 library(cowplot)
 ## read association
-box_association <- readRDS("/Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/analysis/Tweedieverse/Cross/Breastmilk/Tweedieverse_mother_microbiome_infant_Breast_milk_collected/figures/Breast_milk_collected_gg_associations.RDS")
+box_association <- readRDS("/Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/analysis/Tweedieverse/Cross/Breastmilk/Tweedieverse_mother_microbiome_infant_Maternal_vs._donor/figures/Maternal_vs._donor_gg_associations.RDS")
 ## do plots
 
 paird_microbiome <- read.delim(
@@ -29,12 +29,12 @@ corr_bar_plot <- ggplot2::ggplot(data=paird_microbiome, aes(x= Feature_1, y=Corr
   ggplot2::geom_bar(stat="identity", fill = paird_microbiome$gwfill, alpha = 0.5, size=0.1) +
   xlab("Common species in infant stool and breast milk")+ylab("Spearman Coef")+
   omicsArt::theme_omicsEye()+
-  theme(axis.title = element_text(face="bold"), axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6))
+  theme(axis.title = element_text(face="bold"), axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face = "italic"))
 
 corr_bar_plot
 
 fig2 <- ggdraw() +
-  draw_plot(speices_heat_plot$gtable,
+  draw_plot(speices_heat_plot$gtable, #theme(axis.text.x =element_text(face="bold.italic")),
             x = 0.02, y = .6, width = .99, height = .4) +
   draw_plot(corr_bar_plot,
             x = 0.02, y = 0, width = .5, height = .6) +

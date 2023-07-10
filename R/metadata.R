@@ -32,15 +32,15 @@ infant_metadata$`Gestational age` <- infant_metadata$`Gestational age week` * 7 
 
 # time_based (all vitis) <- c:
 #   Visit (Visit time point), Gestational_age_week (Gestational age (weeks))", "Gestational_age_day", "Gestational_age_category (Gestational age category)", "Gestational_by_weight_percentage (Weight percentile by gestational age)", "Gestational_by_weight_category (Weight category by gestational age)",  "Sex (Sex)", "Days_in_NICU", "Breast_milk_collected", "Diet_at_sample (Diet) ", "All_medications_infant", "Recent_follow_up_date"), "Birth_weight (Birth weight)", "Birth_weight_category (Birth weight category)",   "Sample_fortified_with (Fortifer in feed)",  "Age_stool_sample (Age at sample)",  Method_of_feeding (Feeding method)",      "Last_antibiotic_received (Time since last antibiotic)",          "Gastric_acid_suppresion (Gastric acid suppression)",  "Underwent_sepsis (Underwent sepsis rule out)", "Diagnosed_with_Sepsis (Diagnosed with sepsis)"
-# 
-# not_time_based (visit a) <- c "Breast_milk_sample_date", "Age_at_breast_milk_sample", "Stool_sample_date", 
-# "GI_related_diagnosis",  "GI_surgery_prior", "Metabolic_Condition", "Cystic_Fibrosis",   
-# "Infection_due_resistant",  "MRSA_swab_result", "VRE_swab_result", "Problems_at_discharge",  "Other_medical_conditions") 
-# 
+#
+# not_time_based (visit a) <- c "Breast_milk_sample_date", "Age_at_breast_milk_sample", "Stool_sample_date",
+# "GI_related_diagnosis",  "GI_surgery_prior", "Metabolic_Condition", "Cystic_Fibrosis",
+# "Infection_due_resistant",  "MRSA_swab_result", "VRE_swab_result", "Problems_at_discharge",  "Other_medical_conditions")
+#
 # For breastmilk:
-#   
-#   m_time_based: (all vitis) <- c("Visit (Visit time point)", "Maternal_education", "Gravidity (Gravidity)", "Parity_after_delivery (Parity after delivery)", "Maternal_smoking (Maternal smoking)", "Alcohol_during_pregnancy (Alcohol during pregnancy)", "Hypertensive_disorder (Hypertensive disorder)", "GBS_positive", "PROM (Premature rupture of membranes)", "Chorioamnionitis (Chorioamnionitis)", "Supplements_during_pregnancy"),  "Age (Maternal Age)",  "Method_of_delivery (Method of Delivery)",              "Antibiotic_use_prenatally (Prenatal antibiotic use)","Antibiotic_during_delivery (Peripartum antibiotic use)"  "BMI( BMI), "BMI_category (BMI category)", "Ethnicity (Ethnicity)", "Race (Race)", 
-# 
+#
+#   m_time_based: (all vitis) <- c("Visit (Visit time point)", "Maternal_education", "Gravidity (Gravidity)", "Parity_after_delivery (Parity after delivery)", "Maternal_smoking (Maternal smoking)", "Alcohol_during_pregnancy (Alcohol during pregnancy)", "Hypertensive_disorder (Hypertensive disorder)", "GBS_positive", "PROM (Premature rupture of membranes)", "Chorioamnionitis (Chorioamnionitis)", "Supplements_during_pregnancy"),  "Age (Maternal Age)",  "Method_of_delivery (Method of Delivery)",              "Antibiotic_use_prenatally (Prenatal antibiotic use)","Antibiotic_during_delivery (Peripartum antibiotic use)"  "BMI( BMI), "BMI_category (BMI category)", "Ethnicity (Ethnicity)", "Race (Race)",
+#
 # m_not_time_based (visit a) <- c( "Maritial_status", "Weight_1Year_Prior", "Height", "Country_lived", "Household_income", "Breast_milk_collected",
 #           )
 
@@ -60,17 +60,18 @@ infant_metadata <- infant_metadata[, ! colnames(infant_metadata) %in% c("BMI cat
                                                                         "Recent follow up date",
                                                                         "VRE swab result",
                                                                         "Days in NICU",
-                                                                        "Breast milk sample date", 
-                                                                        "Age at breast milk sample", 
-                                                                        "Stool sample date", 
-                                                                        "GI related diagnosis",  
-                                                                        "GI surgery prior", 
-                                                                        "Metabolic Condition", 
-                                                                        "Cystic Fibrosis",   
-                                                                        "Infection due resistant",  
-                                                                        "MRSA swab result", "VRE swab result", 
-                                                                        "Problems at discharge",  "Other medical conditions"
-                                                                        
+                                                                        "Breast milk sample date",
+                                                                        "Age at breast milk sample",
+                                                                        "Stool sample date",
+                                                                        "GI related diagnosis",
+                                                                        "GI surgery prior",
+                                                                        "Metabolic Condition",
+                                                                        "Cystic Fibrosis",
+                                                                        "Infection due resistant",
+                                                                        "MRSA swab result", "VRE swab result",
+                                                                        "Problems at discharge",  "Other medical conditions",
+                                                                        "Diet"
+
 )]
 
 #colnames(infant_metadata) <- gsub("_", " ", colnames(infant_metadata))
@@ -81,7 +82,7 @@ if (do_write){
   ggsave(filename='Manuscript/figures/SFig1/SFig1a.png', plot=result_infant$pval_hetamap, width = 7.2, height = 6, units = "in", dpi = 300)
   write.table( result_infant$P_perm,"Manuscript/figures/SFig1/SFig1a_infant_stool_metadataCorrelation_Pvalue.txt",
               sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
-  # 
+  #
   write.table(infant_metadata, '/Users/rah/Library/CloudStorage/Box-Box/GW Genomics Core Projects/Projects Currently being Analyzed/Projects for Pay/INOVA_Stool_and_Breastmilk_0074 (Ali)/data/metadata/infant_metadata_processed.txt',
              sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
 }
@@ -129,7 +130,7 @@ if (do_write){
                sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
   write.table(mother_metadata, '/Users/rah/Library/CloudStorage/Box-Box/GW Genomics Core Projects/Projects Currently being Analyzed/Projects for Pay/INOVA_Stool_and_Breastmilk_0074 (Ali)/data/metadata/mother_mother_processed.txt',
               sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
-  
+
   SFig1 <- plot_grid(result_infant$pval_hetamap$gtable,
                      result_breastmilk$pval_hetamap$gtable,
                     ncol = 2, nrow = 1, align = 'h', labels = c("a, infant metadata", "b, maternal-donor metadata"),
