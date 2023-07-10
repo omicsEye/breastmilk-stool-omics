@@ -16,7 +16,7 @@ library(massSight)
 setwd("/Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/")
 
 #path_to_file <- "data/INOV-0101-19INTR Client Data Table (Frozen)-Raw Data_Cleaned_Ali.xlsx"
-output_path <- paste('analysis/meatbolite', sep = '')
+output_path <- paste('analysis/metabolite', sep = '')
 dir.create(file.path(output_path), showWarnings = FALSE)
 
 do_write = F
@@ -135,7 +135,7 @@ infant_microbiome_samples <- intersect(colnames(microbiome[,rownames(mom_or_infa
 infant_metadata_microbiome <- infant_metadata[infant_microbiome_samples,]
 infant_microbiome <- microbiome[,infant_microbiome_samples]
 rownames(infant_metadata) <- gsub("_f","", rownames(infant_metadata))
-rownames(infant_metadata) <- paste0(infant_metadata$Ex, infant_metadata$`Visit time point`, spe="")
+rownames(infant_metadata) <- paste0(infant_metadata$`External ID`, infant_metadata$`Visit time point`, spe="")
 mother_microbiome_samples <- intersect(colnames(microbiome[,rownames(mom_or_infant[mom_or_infant$Sample=="Breast milk",,drop=F])]), rownames(mother_metadata))
 mother_metadata_microbiome <- mother_metadata[mother_microbiome_samples,]
 mother_microbiome <- microbiome[,mother_microbiome_samples]
