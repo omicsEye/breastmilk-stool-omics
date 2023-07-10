@@ -1,14 +1,24 @@
 cd /Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/
 
 
+<<<<<<< HEAD
 ### 1 microbiome-microbiome
 btest -X data/infant_microbiome_mother_microbiome.txt -Y data/mother_microbiome_infant_microbiome.txt -o analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair -m spearman --fdr 0.05
+=======
+### 1:  Infant stool microbiome- breastmilk microbiome
+btest -X data/infant_microbiome_mother_microbiome.txt -Y data/mother_microbiome_infant_microbiome.txt -o analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair -m spearman --fdr 1.0 
+>>>>>>> e680b71056d0087c415658c726e5f825f3f8d28c
 
 
 blockplot analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/simtable.tsv analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/btest_30.png --axlabels "Infant stool microbiome" "Breast milk microbiome"  --similarity Spearman --strongest 30
 
 b_scatter --datax data/infant_microbiome_mother_microbiome.txt --datay data/mother_microbiome_infant_microbiome.txt --b_test analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/X_Y.tsv -o /Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/ --ind 0-197
 
+<<<<<<< HEAD
+=======
+### 2: infant stool metabolite - breast milk microbiome 
+btest -X data/infant_metabolite_mother_microbiome.txt -Y data/mother_microbiome_infant_metabolite.txt -o analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair -m spearman --fdr 1.0 
+>>>>>>> e680b71056d0087c415658c726e5f825f3f8d28c
 
 ### 2 infant metabolite - mother microbiome
 btest -X data/infant_metabolite_mother_microbiome.txt -Y data/mother_microbiome_infant_metabolite.txt -o analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair -m spearman --fdr 0.05
@@ -21,6 +31,7 @@ b_scatter --datax data/infant_metabolite_mother_microbiome.txt --datay data/moth
 
 
 
+<<<<<<< HEAD
 ### 3 infant microbiome-metabolite
 btest -X data/infant_microbiome_metabolite.txt -Y data/infant_metabolite_microbiome.txt -o analysis/btest_results/infant_microbiome_metabolite_btest_pair -m spearman --fdr 0.05
 
@@ -48,6 +59,10 @@ btest -X data/stool_BGC_metabolite_clean_names.txt -Y data/infant_metabolite_BGC
 blockplot analysis/btest_results/infant_BGC_metabolite_btest_pair/simtable.tsv analysis/btest_results/infant_BGC_metabolite_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_BGC_metabolite_btest_pair/btest_28.pdf --strongest 28 --axlabels "Infant stool BGCs" "Infant stool metabolites"  --similarity Spearman
 
 b_scatter --datax data/stool_BGC_metabolite_clean_names.txt --datay data/infant_metabolite_BGC.txt  --b_test analysis/btest_results/infant_BGC_metabolite_btest_pair/X_Y.tsv -o /Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/analysis/btest_results/infant_BGC_metabolite_btest_pair/ --ind 0-10
+=======
+### 3 infant stool microbiome- infant stool metabolite
+btest -X data/infant_microbiome_metabolite.txt -Y data/infant_metabolite_microbiome.txt -o analysis/btest_results/infant_microbiome_metabolite_btest_pair -m spearman --fdr 1.0 
+>>>>>>> e680b71056d0087c415658c726e5f825f3f8d28c
 
 
 
