@@ -4,11 +4,11 @@ setwd("/Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/")
 
 #infant
 infant_microbiome2 <- as.data.frame(t(infant_microbiome))
-infant_metadata2 = infant_metadata[, !colnames(infant_metadata) %in% c("External ID")]#[infant_metadata$Visit=="a",]
+infant_metadata2 <- infant_metadata[, !colnames(infant_metadata) %in% c("External ID")] #[infant_metadata$Visit=="a",]
 infant_metadata2 <- infant_metadata2[, apply(infant_metadata2, 2, Tweedieverse::entropy) > 0.5]
 intersect_samples <- intersect(rownames(infant_microbiome2), rownames(infant_metadata2))
-infant_metadata2 = infant_metadata[intersect_samples,]
-infant_microbiome2 = infant_microbiome2[intersect_samples,]
+infant_metadata2 <- infant_metadata2[intersect_samples,]
+infant_microbiome2 <- infant_microbiome2[intersect_samples,]
 
 
 M_perm <- matrix(NA, nrow=length(infant_metadata2), ncol=3)
@@ -41,11 +41,11 @@ for (meta in colnames(infant_metadata2)){
     print(paste('error:', e))
   })
 }
-infant_metadata2 = infant_metadata[, !colnames(infant_metadata) %in% c("External ID")]#[infant_metadata$Visit=="a",]
+infant_metadata2 <-infant_metadata[, !colnames(infant_metadata) %in% c("External ID")]#[infant_metadata$Visit=="a",]
 infant_metadata2 <- infant_metadata2[, apply(infant_metadata2, 2, Tweedieverse::entropy) > 0.5]
 intersect_samples <- intersect(rownames(infant_metabolite), rownames(infant_metadata2))
-infant_metadata2 = infant_metadata2[intersect_samples,]
-infant_metabolite = infant_metabolite[intersect_samples,]
+infant_metadata2 <- infant_metadata2[intersect_samples,]
+infant_metabolite <- infant_metabolite[intersect_samples,]
 omic <- "Infant stool metabolite"
 data <- infant_metabolite
 data[is.na(data)]<-0
@@ -69,11 +69,11 @@ for (meta in colnames(infant_metadata2)){
 
 #####################Mother###############################
 mother_microbiome_data <- as.data.frame(t(mother_microbiome))
-infant_metadata2 = infant_metadata[, !colnames(infant_metadata) %in% c("External ID")]#[infant_metadata$Visit=="a",]
+infant_metadata2 <- infant_metadata[, !colnames(infant_metadata) %in% c("External ID")]#[infant_metadata$Visit=="a",]
 infant_metadata2 <- infant_metadata2[, apply(infant_metadata2, 2, Tweedieverse::entropy) > 0.5]
 intersect_samples <- intersect(rownames(mother_microbiome_data), rownames(infant_metadata2))
-infant_metadata2 = infant_metadata2[intersect_samples,]
-mother_microbiome_data = mother_microbiome_data[intersect_samples,]
+infant_metadata2 <- infant_metadata2[intersect_samples,]
+mother_microbiome_data <- mother_microbiome_data[intersect_samples,]
 omic <- "Breast milk microbiome"
 data <- mother_microbiome_data
 
@@ -99,7 +99,7 @@ R_perm[is.na(R_perm)] <- 0.001
 P_perm[is.na(P_perm)] <- 0.99
 
 
-omnibus_heatmap_Infant <- omicsArt::ps2heatmap(t(R_perm), t(P_perm), FDR = F)
+omnibus_heatmap_Infant <- omicsArt::ps2heatmap(t(R_perm), t(P_perm), fontsize = 7, FDR = F)
 ggsave(filename=paste('manuscript/figures/fig3_PERMANOVA/omnibus_heatmap_Infant_euclidean_FDR_Va.pdf', sep=''), plot=omnibus_heatmap_Infant,
        width = 8, height = .75, units = "in", dpi = 350)
 
@@ -111,7 +111,7 @@ write.table( R_perm,"manuscript/figures/fig3_PERMANOVA/omnibus_heatmap_Infant_R.
 
 ##########################Maternal Metadata #######################
 
-mother_metadata2 = mother_metadata[, !colnames(mother_metadata) %in% c("External ID")]#[mother_metadata$Visit=="a",]
+mother_metadata2 <- mother_metadata[, !colnames(mother_metadata) %in% c("External ID")]#[mother_metadata$Visit=="a",]
 
 M_perm <- matrix(NA, nrow=length(mother_metadata2), ncol=3)
 
@@ -123,8 +123,8 @@ R_perm = P_perm = M_perm
 infant_microbiome2 <- as.data.frame(t(infant_microbiome))
 
 intersect_samples <- intersect(rownames(infant_microbiome2), rownames(mother_metadata2))
-mother_metadata2 = mother_metadata2[intersect_samples,]
-infant_microbiome2 = infant_microbiome2[intersect_samples,]
+mother_metadata2 <- mother_metadata2[intersect_samples,]
+infant_microbiome2 <- infant_microbiome2[intersect_samples,]
 
 omic <- "Infant stool microbiome"
 data <- infant_microbiome2
@@ -149,8 +149,8 @@ for (meta in colnames(mother_metadata2)){
 }
 
 intersect_samples <- intersect(rownames(infant_metabolite), rownames(mother_metadata))
-mother_metadata2 = mother_metadata[intersect_samples,]
-infant_metabolite = infant_metabolite[intersect_samples,]
+mother_metadata2 <- mother_metadata2[intersect_samples,]
+infant_metabolite <- infant_metabolite[intersect_samples,]
 omic <- "Infant stool metabolite"
 data <- infant_metabolite
 data[is.na(data)]<-0
@@ -178,8 +178,8 @@ for (meta in colnames(mother_metadata2)){
 mother_microbiome_data <- as.data.frame(t(mother_microbiome))
 #mother_metadata2 = mother_metadata[mother_metadata$Visit=="a",]
 intersect_samples <- intersect(rownames(mother_microbiome_data), rownames(mother_metadata2))
-mother_metadata2 = mother_metadata2[intersect_samples,]
-mother_microbiome_data = mother_microbiome_data[intersect_samples,]
+mother_metadata2 <- mother_metadata2[intersect_samples,]
+mother_microbiome_data <- mother_microbiome_data[intersect_samples,]
 omic <- "Breast milk microbiome"
 data <- mother_microbiome_data
 data[is.na(data)]<-0
@@ -204,7 +204,7 @@ for (meta in colnames(mother_metadata2)){
   })
 }
 
-omnibus_heatmap_maternal <- omicsArt::ps2heatmap(t(R_perm), t(P_perm), FDR = T)
+omnibus_heatmap_maternal <- omicsArt::ps2heatmap(t(R_perm), t(P_perm), fontsize = 7, FDR = F)
 ggsave(filename=paste('manuscript/figures/fig3_PERMANOVA/omnibus_heatmap_maternal_euclidean_FDR.pdf', sep=''), plot=omnibus_heatmap_maternal,
        width = 8, height = .75, units = "in", dpi = 350)
 write.table( P_perm,"manuscript/figures/fig3_PERMANOVA/omnibus_heatmap_maternal_P.txt",
@@ -215,18 +215,18 @@ write.table( R_perm,"manuscript/figures/fig3_PERMANOVA/omnibus_heatmap_maternal_
 
 ###############################################################################
 ##############combine figures ##############################
-fig_permenova <-   plot_grid(omnibus_heatmap_Infant,
-                             omnibus_heatmap_maternal,
+fig_permenova <-   plot_grid(omnibus_heatmap_Infant + theme(axis.text= ggplot2::element_text(size = 6.5)),
+                             omnibus_heatmap_maternal + theme(axis.text= ggplot2::element_text(size = 6.5)),
                              #rel_widths = c(1, 1, 1,1),
-                             labels = c('a, infnat clinical information', 'b, maternal clinical information'),
+                             labels = c('a, infant clinical information', 'b, maternal clinical information'),
                              label_size = 7, ncol = 1, nrow = 2)
 
 fig_permenova
 ggsave(filename=paste('manuscript/figures/fig3_PERMANOVA/fig3_omnibus_heatmap_euclidean_FDR.pdf', sep=''), plot=fig_permenova,
-       width = 7.2, height = 3.75, units = "in", dpi = 350)
+       width = 7.2, height = 2.5, units = "in", dpi = 350)
 
-ggsave(filename=paste('manuscript/figures/fig3_PERMANOVA/fig3_omnibus_heatmap_euclidean_FDR.png', sep=''), plot=fig_permenova,
-       width = 7.2, height = 3.75, units = "in", dpi = 350)
+ ggsave(filename=paste('manuscript/figures/fig3_PERMANOVA/fig3_omnibus_heatmap_euclidean_FDR.png', sep=''), plot=fig_permenova,
+       width = 7.2, height = 2.5, units = "in", dpi = 350)
 ##############################
 
 

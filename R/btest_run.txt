@@ -2,31 +2,55 @@ cd /Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/
 
 
 ### 1 microbiome-microbiome
-btest -X data/infant_microbiome_mother_microbiome.txt -Y data/mother_microbiome_infant_microbiome.txt -o analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair -m spearman --fdr 1.0 
+btest -X data/infant_microbiome_mother_microbiome.txt -Y data/mother_microbiome_infant_microbiome.txt -o analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair -m spearman --fdr 0.05
 
 
-blockplot analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/simtable.tsv analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/btest_20.png --axlabels "Infant stool microbiome" "Breast milk microbiome"  --similarity Spearman --strongest 20
+blockplot analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/simtable.tsv analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/btest_30.png --axlabels "Infant stool microbiome" "Breast milk microbiome"  --similarity Spearman --strongest 30
+
+b_scatter --datax data/infant_microbiome_mother_microbiome.txt --datay data/mother_microbiome_infant_microbiome.txt --b_test analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/X_Y.tsv -o /Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/analysis/btest_results/infant_microbiome_mother_microbiome_btest_pair/ --ind 0-197
 
 
-### 2 infant metabolite - mother microbiome 
-btest -X data/infant_metabolite_mother_microbiome.txt -Y data/mother_microbiome_infant_metabolite.txt -o analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair -m spearman --fdr 1.0 
+### 2 infant metabolite - mother microbiome
+btest -X data/infant_metabolite_mother_microbiome.txt -Y data/mother_microbiome_infant_metabolite.txt -o analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair -m spearman --fdr 0.05
 
 
 
-blockplot analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/simtable.tsv analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/btest_20.png --axlabels "Infant stool metabolites" "Breast milk microbiome"  --similarity Spearman --strongest 20
+blockplot analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/simtable.tsv analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/btest_30.png --axlabels "Infant stool metabolites" "Breast milk microbiome"  --similarity Spearman --strongest 30
+
+b_scatter --datax data/infant_metabolite_mother_microbiome.txt --datay data/mother_microbiome_infant_metabolite.txt --b_test analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/X_Y.tsv -o /Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/analysis/btest_results/infant_metabolite_mother_microbiome_btest_pair/ --ind 0-48
+
 
 
 ### 3 infant microbiome-metabolite
-btest -X data/infant_microbiome_metabolite.txt -Y data/infant_metabolite_microbiome.txt -o analysis/btest_results/infant_microbiome_metabolite_btest_pair -m spearman --fdr 1.0 
+btest -X data/infant_microbiome_metabolite.txt -Y data/infant_metabolite_microbiome.txt -o analysis/btest_results/infant_microbiome_metabolite_btest_pair -m spearman --fdr 0.05
 
-blockplot analysis/btest_results/infant_microbiome_metabolite_btest_pair/simtable.tsv analysis/btest_results/infant_microbiome_metabolite_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_microbiome_metabolite_btest_pair/btest_20_strongest.pdf --strongest 20 --axlabels "Infant stool microbiome" "Infant stool metabolites"  --similarity Spearman
-
-
-btest -X data/R_infant_genes.txt -Y data/R_mother_genes.txt -m spearman  -o analysis/btest_results/btest_output_R_genes_infant_vs_breatsmilk --fdr 0.5
-
-btest -X data/AR_infant_genes.txt -Y data/AR_mother_genes.txt -m spearman  -o analysis/btest_results/btest_output_AR_genes_infant_vs_breatsmilk --fdr 0.5
+blockplot analysis/btest_results/infant_microbiome_metabolite_btest_pair/simtable.tsv analysis/btest_results/infant_microbiome_metabolite_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_microbiome_metabolite_btest_pair/btest_30.png --strongest 30 --axlabels "Infant stool microbiome" "Infant stool metabolites"  --similarity Spearman
 
 
-### 2 infant BGC - metabolite 
-btest -X data/infant_metabolite_BGC.txt -Y data/stool_BGC_metabolite.txt -o analysis/btest_results/infant_metabolite_BGC_btest_pair --fdr 1 --var 0.0
-blockplot analysis/btest_results/infant_metabolite_BGC_btest_pair/simtable.tsv analysis/btest_results/infant_metabolite_BGC_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_metabolite_BGC_btest_pair/btest_28_strongest_p001.pdf --strongest 28 --axlabels "Infant stool BGCs" "Infant stool metabolites"  --similarity Spearman
+b_scatter --datax data/infant_microbiome_metabolite.txt --datay data/infant_metabolite_microbiome.txt  --b_test analysis/btest_results/infant_microbiome_metabolite_btest_pair/X_Y.tsv -o /Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/analysis/btest_results/infant_microbiome_metabolite_btest_pair/ --ind 0-49
+
+
+
+btest -X data/R_infant_genes.txt -Y data/R_mother_genes.txt -m spearman  -o analysis/btest_results/btest_output_R_genes_infant_vs_breatsmilk --fdr 0.05
+
+blockplot analysis/btest_results/btest_output_R_genes_infant_vs_breatsmilk/simtable.tsv analysis/btest_results/btest_output_R_genes_infant_vs_breatsmilk/X_Y.tsv --outfile analysis/btest_results/btest_output_R_genes_infant_vs_breatsmilk/btest_11_strongest.pdf --strongest 11 --axlabels "Infant - stool microbial multi-drug resistance genes" "Breast milk - microbial multi-drug resistance genes"  --similarity Spearman
+
+b_scatter --datax data/R_infant_genes.txt --datay data/R_mother_genes.txt  --b_test analysis/btest_results/btest_output_R_genes_infant_vs_breatsmilk/X_Y.tsv -o /Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/analysis/btest_results/btest_output_R_genes_infant_vs_breatsmilk/ --ind 0-10
+
+
+
+btest -X data/AR_infant_genes.txt -Y data/AR_mother_genes.txt -m spearman  -o analysis/btest_results/btest_output_AR_genes_infant_vs_breatsmilk --fdr 0.05
+
+
+### 2 infant BGC - metabolite
+btest -X data/stool_BGC_metabolite_clean_names.txt -Y data/infant_metabolite_BGC.txt  -o analysis/btest_results/infant_BGC_metabolite_btest_pair --fdr 0.05
+
+blockplot analysis/btest_results/infant_BGC_metabolite_btest_pair/simtable.tsv analysis/btest_results/infant_BGC_metabolite_btest_pair/X_Y.tsv --outfile analysis/btest_results/infant_BGC_metabolite_btest_pair/btest_28.pdf --strongest 28 --axlabels "Infant stool BGCs" "Infant stool metabolites"  --similarity Spearman
+
+b_scatter --datax data/stool_BGC_metabolite_clean_names.txt --datay data/infant_metabolite_BGC.txt  --b_test analysis/btest_results/infant_BGC_metabolite_btest_pair/X_Y.tsv -o /Users/rah/Dropbox/Ali-Docs/Research_docs/Projects/INOVA_Breastmilk/analysis/btest_results/infant_BGC_metabolite_btest_pair/ --ind 0-10
+
+
+
+
+
+

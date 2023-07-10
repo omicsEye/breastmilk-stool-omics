@@ -67,7 +67,7 @@ ord <- omicsArt:::pcl.tsne(fakepcl)
 ord_plot <- omicsArt:::pcl.ordplot(fakepcl, ord, colour="Sample")
 pcoa_theme <-   theme(axis.text.x=element_blank(),
                       axis.ticks.x=element_blank(),
-                      plot.title =element_text(face="bold.italic"), 
+                      plot.title =element_text(face="bold.italic"),
                       axis.ticks.y=element_blank(),
                       axis.text.y=element_blank())
 ord_plot <- ord_plot+  guides(fill = guide_legend(title = "", keywidth=0.1 ,keyheight=0.1, default.unit="inch",  override.aes = list(size=4)))+ pcoa_theme
@@ -103,11 +103,12 @@ sBGCs_05 <- stool_BGC[,colSums(stool_BGC>0.0) > nrow(stool_BGC)*.85]
 
 BGCs_75 <- BGCs[,colSums(BGCs>0.0) > nrow(BGCs)*.85]
 BGCs_05 <- BGCs[,union(colnames(sBGCs_05), union(colnames(bBGCs_05), colnames(BGCs_75)))]
+colnames(BGCs_05) <- gsub('.*\\.\\gbk ', '', colnames(BGCs_05))
 fakepcl <- list(meta=mom_or_infant_BGC, x=as.matrix(BGCs_05),
                 ns=dim(BGCs)[2], nf=dim(BGCs)[1])
 heat_plot <- omicsArt:::pcl.heatmap(fakepcl, sqrtspace = T, gamma = 10, meta= "Sample", show_colnames = F, show_rownames = T,treeheight_row = 0, treeheight_col= 5 )
-ggsave(filename='analysis/BGCs_heatmap_85.png', plot=heat_plot, width = 16, height = 6, units = "in", dpi = 300)
-ggsave(filename='analysis/BGCs_heatmap_85.pdf', plot=heat_plot, width = 16, height = 6, units = "in", dpi = 300)
+ggsave(filename='analysis/BGCs_heatmap_85.png', plot=heat_plot, width = 7.2, height = 4.5, units = "in", dpi = 300)
+ggsave(filename='analysis/BGCs_heatmap_85.pdf', plot=heat_plot, width = 7.2, height = 4.5, units = "in", dpi = 300)
 
 ## species  overall plot  ######
 
@@ -214,7 +215,7 @@ for (meta in colnames(mother_metadata_microbiome)){
                                prev_threshold = 0.01,
                                max_significance = .1,
                                standardize = T,
-                               
+
                                #fixed_effects = c("Visit_type", "Race"),
                                plot_scatter =  T,  #"Has_subj_ever_had_a_yeast_infection"),
                                plot_heatmap = T
@@ -269,7 +270,7 @@ for (meta in colnames(mother_metadata_microbiome)){
                                prev_threshold = 0.01,
                                max_significance = .1,
                                standardize = T,
-                               
+
                                #fixed_effects = c("Visit_type", "Race"),
                                plot_scatter =  T,  #"Has_subj_ever_had_a_yeast_infection"),
                                plot_heatmap = T

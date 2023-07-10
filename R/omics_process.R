@@ -196,6 +196,10 @@ if (do_write){
               sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
   write.table(stool_BGC, 'data/stool_BGC.tsv',
               sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
+  write.table(stool_BGC, 'data/stool_BGC.tsv',
+              sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
+  write.table(BGCs, 'data/BGCs.tsv',
+              sep = "\t", eol = "\n", quote = F, col.names = NA, row.names = T)
 }
 
 
